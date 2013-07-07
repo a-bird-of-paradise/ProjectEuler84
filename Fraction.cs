@@ -12,7 +12,13 @@ namespace ProjectEuler84
         private long Denominator;
         private bool Original;
 
-        public Fraction(long x, long y = 1)
+        public Fraction()
+        {
+            Numerator = 0;
+            Denominator = 1;
+        }
+
+        public Fraction(long x = 0, long y = 1)
         {
             Numerator = x;
             Denominator = y;
