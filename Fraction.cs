@@ -81,21 +81,25 @@ namespace ProjectEuler84
 
         public static Fraction operator +(Fraction x, Fraction y)
         {
+            if (y.Denominator == x.Denominator && x.Numerator + y.Numerator == 0) return new Fraction(0);
             return new Fraction(x.Numerator * y.Denominator + x.Denominator * y.Numerator, x.Denominator * y.Denominator);
         }
 
         public static Fraction operator -(Fraction x, Fraction y)
         {
+            if (x == y) return new Fraction(0);
             return new Fraction(x.Numerator * y.Denominator - x.Denominator * y.Numerator, x.Denominator * y.Denominator);
         }
 
         public static Fraction operator *(Fraction x, Fraction y)
         {
+            if (x.Numerator == 0 || y.Numerator == 0) return new Fraction(0);
             return new Fraction(x.Numerator * y.Numerator, x.Denominator * y.Denominator);
         }
 
         public static Fraction operator /(Fraction x, Fraction y)
         {
+            if (x.Numerator == 0) return new Fraction(0);
             return new Fraction(x.Numerator * y.Denominator, x.Denominator * y.Numerator);
         }
 

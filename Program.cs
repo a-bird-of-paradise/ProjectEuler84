@@ -18,9 +18,10 @@ namespace ProjectEuler84
     {
         static void Main(string[] args)
         {
-            DiceRollProbabilityGenerator Gen = new DiceRollProbabilityGenerator(2, 6);
+            DiceRollProbabilityGenerator Gen = new DiceRollProbabilityGenerator(2, 4);
             List<Fraction> Probs = Gen.GetProbabilities();
             foreach (Fraction x in Probs) Console.WriteLine(x);
+            Console.WriteLine("sum is: "+Probs.Aggregate((x, y) => x + y));
         }
     }
 }
