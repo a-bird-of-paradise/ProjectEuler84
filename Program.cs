@@ -28,7 +28,7 @@ namespace ProjectEuler84
         static SquareMatrix<Fraction> f(SquareMatrix<Fraction> x)
         {
             SquareMatrix<Fraction> answer = (SquareMatrix<Fraction>) x.Clone();
-            int n = answer.Values.GetUpperBound(0);
+            int n = answer.Size;
             for (int i = 0; i < n; i++)
                 answer.Values[i, n - 1] = new Fraction(1);
             return answer;
@@ -36,11 +36,7 @@ namespace ProjectEuler84
 
         static void Main(string[] args)
         {
-            DiceRollProbabilityGenerator Gen = new DiceRollProbabilityGenerator(2, 4);
-            List<Fraction> Probs = Gen.GetProbabilities();
-            foreach (Fraction x in Probs) Console.WriteLine(x);
-            Console.WriteLine("sum is: "+Probs.Aggregate((x, y) => x + y));
-            SquareMatrix<Fraction> z = Ones(40);
+            DiceRollProbabilityGenerator Gen = new DiceRollProbabilityGenerator(1,6);
         }
     }
 }

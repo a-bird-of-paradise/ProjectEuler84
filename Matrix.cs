@@ -45,10 +45,10 @@ namespace ProjectEuler84
 
         public object Clone()
         {
-            SquareMatrix<T> Answer = new SquareMatrix<T>(this.Values.GetUpperBound(0));
-            for (int i = 0; i < this.Values.GetUpperBound(0); i++)
+            SquareMatrix<T> Answer = new SquareMatrix<T>(this.Values.GetUpperBound(0)+1);
+            for (int i = 0; i < this.Size; i++)
             {
-                for (int j = 0; j < this.Values.GetUpperBound(1); j++)
+                for (int j = 0; j < this.Size; j++)
                 {
                     Answer.Values[i, j] = (T)this.Values[i, j].Clone();
                 }
@@ -62,7 +62,55 @@ namespace ProjectEuler84
             SquareMatrix<T> answer = new SquareMatrix<T>(left.Size);
             for (int i = 0; i < answer.Size; i++)
                 for (int j = 0; j < answer.Size; j++)
-                    answer.Values[i, j] = left.Values[i, j] - right.Values[i, j];
+                    answer.Values[i, j] = (dynamic)(left.Values[i, j]) - (dynamic)(right.Values[i, j]);
+            return answer;
+        }
+        public static SquareMatrix<T> operator *(SquareMatrix<T> left, int right)
+        {
+            SquareMatrix<T> answer = (SquareMatrix<T>)left.Clone();
+            for (int i = 0; i < answer.Size; i++)
+                for (int j = 0; j < answer.Size; j++)
+                    answer.Values[i, j] = (dynamic)answer.Values[i, j] * right;
+            return answer;
+        }
+        public static SquareMatrix<T> operator *(int left, SquareMatrix<T> right)
+        {
+            return right * left;
+        }
+
+        public static SquareMatrix<T> operator *(SquareMatrix<T> left, T right)
+        {
+            SquareMatrix<T> answer = (SquareMatrix<T>)left.Clone();
+            for (int i = 0; i < answer.Size; i++)
+                for (int j = 0; j < answer.Size; j++)
+                    answer.Values[i, j] = (dynamic)answer.Values[i, j] * right;
+            return answer;
+        }
+        public static SquareMatrix<T> operator *(T left, SquareMatrix<T> right)
+        {
+            return right * left;
+        }
+
+        public static SquareMatrix<T> operator *(SquareMatrix<T> left, SquareMatrix<T> right)
+        {
+            if (left.Size != right.Size) throw new ArgumentException("Matrices must be of the same size.");
+            SquareMatrix<T> answer = new SquareMatrix<T>(left.Size);
+            int n = answer.Size;
+            T accum = new T();
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    for (int k = 0; k < n; k++)
+                    {
+                        for (int l = 0; l < n; l++)
+                        {
+                            accum = accum + (dynamic) left.Values[i, k] * right.Values[l, j];
+                        }
+                    }
+                }
+            }
+            return answer;
         }
     }
 }

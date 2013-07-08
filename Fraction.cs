@@ -18,7 +18,7 @@ namespace ProjectEuler84
             Denominator = 1;
         }
 
-        public Fraction(long x = 0, long y = 1)
+        public Fraction(long x, long y = 1)
         {
             Numerator = x;
             Denominator = y;
@@ -34,6 +34,12 @@ namespace ProjectEuler84
                 Denominator /= gcd;
                 if (gcd > 1) Original = false;
             }
+            if ((Numerator < 0 && Denominator < 0) || (Numerator > 0 && Denominator < 0))
+            {
+                Numerator = -Numerator;
+                Denominator = -Denominator;
+            }
+            
         }
 
         public override bool Equals(Object obj)
@@ -107,6 +113,17 @@ namespace ProjectEuler84
         {
             if (x.Numerator == 0) return new Fraction(0);
             return new Fraction(x.Numerator * y.Denominator, x.Denominator * y.Numerator);
+        }
+
+        public static Fraction operator *(Fraction left, int right)
+        {
+            if (right == 0 || left.Numerator == 0) return new Fraction(0);
+            return new Fraction(right * left.Numerator, left.Denominator);
+        }
+
+        public static Fraction operator *(int left, Fraction right)
+        {
+            return right * left;
         }
 
         public long GCD(long n, long m)
