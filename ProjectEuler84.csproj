@@ -41,12 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DiceRollProbabilityGenerator.cs" />
-    <Compile Include="Fraction.cs" />
-    <Compile Include="Matrix.cs" />
+    <Compile Include="Action.cs" />
+    <Compile Include="Board.cs" />
+    <Compile Include="ChanceSquare.cs" />
+    <Compile Include="CommunityChestSquare.cs" />
+    <Compile Include="Die.cs" />
+    <Compile Include="GoToJailSquare.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransitionMatrixGenerator.cs" />
+    <Compile Include="Square.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
